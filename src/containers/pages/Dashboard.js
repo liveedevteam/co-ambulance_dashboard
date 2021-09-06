@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import FilterDashboard from '../../components/FilterDashboard';
 import Header from '../../components/Header';
 import PartientCaseCard from '../../components/PartientCaseCard';
+import {
+    socketInit
+} from '../../libs'
 
 class Dashboard extends Component {
     constructor() {
@@ -11,12 +14,27 @@ class Dashboard extends Component {
         }
     }
 
+    getRealtimeData = async () => {
+        const socket = socketInit()
+        socket.on('connect', async () => {
+        })
+        socket.emit('get-data-to-dashboard', 'test')
+        socket.on('get-data', async (response) => {
+            console.log(response)
+        })
+
+    }
+
     handleChange = async (name, value) => {
-        console.log(name)
-        console.log(value)
+        // console.log(name)
+        // console.log(value)
         this.setState({
             [name]: value
         })
+    }
+
+    componentDidMount = async () => {
+        await this.getRealtimeData()
     }
 
     render() {

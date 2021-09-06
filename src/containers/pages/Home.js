@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class Home extends Component {
     constructor() {
@@ -9,12 +10,47 @@ class Home extends Component {
         }
     }
 
-    handleChange = async () => {
-
+    handleChange = async (e) => {
+        const { name, value } = e.target
+        this.setState({
+            [name]: value
+        })
     }
 
     login = async () => {
+        console.log("START: Request login")
+        const {
+            username,
+            password
+        } = this.state
+        const url = `${process.env.REACT_APP_API_URL}/api/auths/login`
+        const body = {
+            username,
+            password
+        }
+        axios.post(url, body)
+            .then(res => {
+                if (res.status === 200) {
+                    localStorage.setItem('actk', res.data.data.accessToken)
+                    this.props.history.push('/dashboard')
+                    
+                }
+            }).catch((error) => {
+                console.log(error.response)
+                try {
+                    alert(`Error: ${error.response.data.msg}`)
+                } catch (err) {
+                    alert(err)
+                }
+                localStorage.removeItem('actk')
+            })
+        console.log("END: Login")
+    }
 
+    componentDidMount = async() => {
+        if (localStorage.getItem('actk')) {
+            this.props.history.push('/dashboard')
+        }
     }
 
     render() {

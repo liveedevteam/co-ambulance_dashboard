@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import LogOut from './LogOut';
 
 class Header extends Component {
     render() {
@@ -9,12 +10,7 @@ class Header extends Component {
                         borderBottom: '3px solid #000',
                         padding: '10px'
                     }}>
-                    <div className="container">
-                        <div style={{ float: 'right' }}>
-                            <i className="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Logout
-                        </div>
-                        <div style={{ clear: 'right' }}></div>
-                    </div>
+                    <LogOut />
                 </div>
             </div>
         );

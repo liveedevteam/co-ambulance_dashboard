@@ -12,6 +12,7 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 import Loading from './containers/pages/Loading';
 
 const Home = React.lazy(() => import("./containers/pages/Home"))
+const Dashboard = React.lazy(() => import("./containers/pages/Dashboard"))
 
 class App extends Component {
   render() {
@@ -22,6 +23,10 @@ class App extends Component {
             <Route
               exact path='/'
               component={Home}
+            />
+            <Route
+              exact path='/dashboard'
+              component={Dashboard}
             />
           </Switch>
         </Suspense>

@@ -10,7 +10,8 @@ class Dashboard extends Component {
     constructor() {
         super()
         this.state = {
-            dashboardType: 0
+            dashboardType: 0,
+            realTimeCases: []
         }
     }
 
@@ -21,6 +22,9 @@ class Dashboard extends Component {
         socket.emit('get-data-to-dashboard', 'test')
         socket.on('get-data', async (response) => {
             console.log(response)
+            this.setState({
+                realTimeCases: response
+            })
         })
 
     }
@@ -106,6 +110,14 @@ class Dashboard extends Component {
                                     </div>
                                 </div>
                             }
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div className="container">
+                    <div className="row">
+                        <div className="col-12">
+                            Test Stream Data: {JSON.stringify(this.state.realTimeCases)}
                         </div>
                     </div>
                 </div>

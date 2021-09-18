@@ -24,6 +24,7 @@ class FilterDashboard extends Component {
                 >
                     <option value={0} defaultValue>รอการ Matching</option>
                     <option value={1}>Matching แล้ว</option>
+                    <option value={1}>คนขับรับ Case แล้ว</option>
                     <option value={2}>รอรถตอบรับ Case เกิน 5 นาที</option>
                     <option value={3}>ประวัติการวิ่งรถ</option>
                     <option value={4}>Matching ล้มเหลว</option>

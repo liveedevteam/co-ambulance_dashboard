@@ -54,6 +54,10 @@ class App extends Component {
               exact path='/dashboard'
               component={Dashboard}
             />
+            <Route
+              exact path='/susco/dashboard'
+              component={HomeDashboard}
+            />
           </Switch>
         </Suspense>}
       </div>

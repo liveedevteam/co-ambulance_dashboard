@@ -8,7 +8,8 @@ class HomeDashboard extends Component {
         super()
         this.state = {
             screnarioCase: 0,
-            mode: null
+            mode: null,
+            status: null
         }
     }
 
@@ -20,7 +21,8 @@ class HomeDashboard extends Component {
         socket.on('replyMode', async (response) => {
             console.log(response)
             this.setState({
-                mode: response.mode
+                mode: response.mode,
+                status: response.status
             })
         })
     }
@@ -33,6 +35,17 @@ class HomeDashboard extends Component {
                     <h1 align="center">Simulation</h1>
                     <hr />
                     <h3>Mode: {this.state.mode}</h3>
+                    <div>Status: {this.state.status}</div>
+                    {
+                        this.state.status === 200 && <div style={{color: 'green'}}>
+                            Success
+                        </div>
+                    }
+                    {
+                        this.state.status !== 200 && <div style={{color: 'red'}}>
+                            Failed
+                        </div>
+                    }
                 </div>
             </div>
         );

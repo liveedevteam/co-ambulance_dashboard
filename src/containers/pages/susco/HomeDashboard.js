@@ -22,7 +22,8 @@ class HomeDashboard extends Component {
             console.log(response)
             this.setState({
                 mode: response.mode,
-                status: response.status
+                status: response.status,
+                data: response.data
             })
         })
     }
@@ -37,15 +38,19 @@ class HomeDashboard extends Component {
                     <h3>Mode: {this.state.mode}</h3>
                     <div>Status: {this.state.status}</div>
                     {
-                        this.state.status === 200 && <div style={{color: 'green'}}>
+                        this.state.status === 200 && <div style={{ color: 'green' }}>
                             Success
                         </div>
                     }
                     {
-                        this.state.status !== 200 && <div style={{color: 'red'}}>
+                        this.state.status !== 200 && <div style={{ color: 'red' }}>
                             Failed
                         </div>
                     }
+                    <div>Data:
+                        {JSON.stringify(this.state.data)}
+                    </div>
+
                 </div>
             </div>
         );

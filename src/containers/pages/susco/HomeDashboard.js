@@ -72,7 +72,7 @@ class HomeDashboard extends Component {
             redirect: 'follow'
         };
 
-        const url = `${process.env.REACT_APP_API_URL}/EDC-sandbox/transaction/:transactionID/pay/save/card-no`
+        const url = `${process.env.REACT_APP_API_URL}/EDC-sandbox/transaction/${this.state.data.Context}/pay/save/card-no`
 
         fetch(url, requestOptions)
             .then(response => response.text())
@@ -92,11 +92,6 @@ class HomeDashboard extends Component {
                 status: response.status,
                 msg: response.msg,
                 data: response.data
-            })
-        })
-        socket.on('payResponse', async (responseOfPay) => {
-            this.setState({
-                payResponse: responseOfPay
             })
         })
     }
@@ -170,7 +165,6 @@ class HomeDashboard extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div>Response: {JSON.stringify(this.state.payResponse)}</div>
                         </div>
                     }
 

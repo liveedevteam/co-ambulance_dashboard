@@ -19,7 +19,8 @@ class HomeDashboard extends Component {
             inputPin: '',
             payResponse: {
 
-            }
+            },
+            context: ''
         }
     }
 
@@ -72,7 +73,7 @@ class HomeDashboard extends Component {
             redirect: 'follow'
         };
 
-        const url = `${process.env.REACT_APP_API_URL}/EDC-sandbox/transaction/${this.state.data.Context}/pay/save/card-no`
+        const url = `${process.env.REACT_APP_API_URL}/EDC-sandbox/transaction/${this.state.context}/pay/save/card-no`
 
         fetch(url, requestOptions)
             .then(response => response.text())
@@ -91,7 +92,8 @@ class HomeDashboard extends Component {
                 mode: response.mode,
                 status: response.status,
                 msg: response.msg,
-                data: response.data
+                data: response.data,
+                context: response.context
             })
         })
     }
@@ -109,6 +111,7 @@ class HomeDashboard extends Component {
                     <div>Data:
                         {JSON.stringify(this.state.data)}
                     </div>
+                    {/* {this.state.context} */}
                     <hr />
                     {
                         this.state.mode === 'pay' && <div>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>Result</div>
+    <div id="test"></div>
+    <script>
+      async function thisIsSyncFunction() {
+        return new Promise(resolve => {
+          let result = 0;
+          fetch('https://codequiz.azurewebsites.net/data')
+            .then(res => res.text())
+            .then((response) => {
+              result = JSON.parse(response).data;
+            })
+          resolve(result)
+      })}
+      const number1 = thisIsSyncFunction()
+      const calculation = number1 * 10;
+      console.log(calculation)
+    </script>
+  </body>
+</html>

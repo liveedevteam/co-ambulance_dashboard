@@ -90,6 +90,7 @@ class HomeDashboard extends Component {
             this.setState({
                 mode: response.mode,
                 status: response.status,
+                msg: response.msg,
                 data: response.data
             })
         })
@@ -109,6 +110,7 @@ class HomeDashboard extends Component {
                     <hr />
                     <h3>Mode: {this.state.mode}</h3>
                     <div>Status: {this.state.status}</div>
+                    <div>Message: {this.state.msg}</div>
                     <div>Data:
                         {JSON.stringify(this.state.data)}
                     </div>

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {
     socketInit
 } from '../../../libs'
-// import axios from 'axios';
 
 class HomeDashboard extends Component {
     constructor() {
@@ -17,37 +16,68 @@ class HomeDashboard extends Component {
                 6,
                 9
             ],
-            inputPin: ''
+            inputPin: '',
+            payResponse: {
+
+            }
         }
     }
 
     onClickPinPad = async (num) => {
         console.log(num)
-        let isNum = /^\d+$/.test(num)
-        if (isNum) {
-            let inputPin = this.state.inputPin
-            inputPin = inputPin + num
-            this.setState({
-                inputPin
-            })
-        } else {
-            if (num === 'del') {
+        if (this.state.inputPin.length < 17) {
+            let isNum = /^\d+$/.test(num)
+            if (isNum) {
                 let inputPin = this.state.inputPin
-                inputPin = inputPin.slice(0, -1)
-                console.log(inputPin)
+                inputPin = inputPin + num
                 this.setState({
                     inputPin
                 })
-            }
-            if (num === 'enter') {
-                let inputPin = this.state.inputPin
-                inputPin = inputPin.slice(0, -1)
-                console.log(inputPin)
-                this.setState({
-                    inputPin
-                })
+            } else {
+                if (num === 'del') {
+                    let inputPin = this.state.inputPin
+                    inputPin = inputPin.slice(0, -1)
+                    console.log(inputPin)
+                    this.setState({
+                        inputPin
+                    })
+                }
+                if (num === 'enter') {
+                    let inputPin = this.state.inputPin
+                    inputPin = inputPin.slice(0, -1)
+                    console.log(inputPin)
+                    this.setState({
+                        inputPin
+                    })
+                }
             }
         }
+    }
+
+    enterCardNumber = async () => {
+        let pinNo = this.state.inputPin
+        if (pinNo === '') pinNo = null
+        alert("Send Card:"+pinNo)
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        const raw = JSON.stringify({
+            "CardNo": pinNo
+        });
+
+        const requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        const url = `${process.env.REACT_APP_API_URL}/EDC-sandbox/transaction/:transactionID/pay/save/card-no`
+
+        fetch(url, requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
     }
 
     componentDidMount = async () => {
@@ -63,6 +93,11 @@ class HomeDashboard extends Component {
                 data: response.data
             })
         })
+        socket.on('payResponse', async (responseOfPay) => {
+            this.setState({
+                payResponse: responseOfPay
+            })
+        })
     }
 
     render() {
@@ -74,16 +109,6 @@ class HomeDashboard extends Component {
                     <hr />
                     <h3>Mode: {this.state.mode}</h3>
                     <div>Status: {this.state.status}</div>
-                    {
-                        this.state.status === 200 && <div style={{ color: 'green' }}>
-                            Success
-                        </div>
-                    }
-                    {
-                        this.state.status !== 200 && <div style={{ color: 'red' }}>
-                            Failed
-                        </div>
-                    }
                     <div>Data:
                         {JSON.stringify(this.state.data)}
                     </div>
@@ -132,7 +157,7 @@ class HomeDashboard extends Component {
                                                                 <td
                                                                     align="center"
                                                                     style={{ width: '60px' }}
-                                                                    onClick={() => this.onClickPinPad('enter')}
+                                                                    onClick={this.enterCardNumber}
                                                                 >enter</td>
                                                             </tr>)
                                                         }
@@ -143,6 +168,7 @@ class HomeDashboard extends Component {
                                     </div>
                                 </div>
                             </div>
+                            <div>Response: {JSON.stringify(this.state.payResponse)}</div>
                         </div>
                     }
 

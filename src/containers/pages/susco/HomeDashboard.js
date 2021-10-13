@@ -24,6 +24,12 @@ class HomeDashboard extends Component {
         }
     }
 
+    handleChnage = async(e) => {
+        const {name, value} = e.target
+        this.setState({
+            [name]:value
+        })
+    }
     onClickPinPad = async (num) => {
         console.log(num)
         if (this.state.inputPin.length < 17) {
@@ -115,7 +121,7 @@ class HomeDashboard extends Component {
                     <hr />
                     {
                         this.state.mode === 'pay' && <div>
-                            Card No: <input type="number" value={this.state.inputPin} disabled />
+                            Card No: <input type="number" value={this.state.inputPin} onChange={this.handleChange} />
                             <br /><br />
                             <div className="pinpad">
                                 <div className="row">

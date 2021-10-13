@@ -121,7 +121,7 @@ class HomeDashboard extends Component {
                     <hr />
                     {
                         this.state.mode === 'pay' && <div>
-                            Card No: <input type="number" value={this.state.inputPin} onChange={this.handleChange} />
+                            Card No: <input type="number" name="inputPin" value={this.state.inputPin} onChange={this.handleChange} />
                             <br /><br />
                             <div className="pinpad">
                                 <div className="row">

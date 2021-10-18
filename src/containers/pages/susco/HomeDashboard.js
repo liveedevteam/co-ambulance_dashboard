@@ -24,10 +24,11 @@ class HomeDashboard extends Component {
         }
     }
 
-    handleChnage = async(e) => {
-        const {name, value} = e.target
+    handleChnage = async (e) => {
+        const { name, value } = e.target
+        console.log(`${name}||${value}`)
         this.setState({
-            [name]:value
+            [name]: value
         })
     }
     onClickPinPad = async (num) => {
@@ -64,7 +65,7 @@ class HomeDashboard extends Component {
     enterCardNumber = async () => {
         let pinNo = this.state.inputPin
         if (pinNo === '') pinNo = null
-        alert("Send Card:"+pinNo)
+        alert("Send Card:" + pinNo)
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
@@ -118,10 +119,16 @@ class HomeDashboard extends Component {
                         {JSON.stringify(this.state.data)}
                     </div>
                     {/* {this.state.context} */}
+
                     <hr />
                     {
                         this.state.mode === 'pay' && <div>
-                            Card No: <input type="number" name="inputPin" value={this.state.inputPin} onChange={this.handleChange} />
+                            Card No: <input
+                                type="number"
+                                name="inputPin"
+                                value={this.state.inputPin}
+                                onChange={this.handleChnage}
+                            />
                             <br /><br />
                             <div className="pinpad">
                                 <div className="row">

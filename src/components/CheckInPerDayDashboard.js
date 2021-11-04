@@ -92,53 +92,59 @@ class CheckInPerDayDashboard extends Component {
                         <br /><br />
                     </div>
                 </div>
+                {console.log(this.state.date.getDay())}
                 <br /><br />
-                {checkIns.map((checkIn, index) => {
-                    if (this.state.vehicleID === "ทั้งหมด") {
-                        return (<div className="card" key={index} style={{ margin: "15px" }}>
-                            <div className="card-header">
-                                {checkIn.vehicleID}
-                            </div>
-                            <div className="card-body">
-                                {checkIn.trips.map((trip, ind) => {
-                                    return (<div key={ind}>
-                                        <div className="row">
-                                            <div className="col">
-                                                {trip.employeeID}
-                                            </div>
-                                            <div className="col">
-                                                {trip.date} : {trip.time}
-                                            </div>
-                                        </div>
-                                        <hr />
-                                    </div>)
-                                })}
-                            </div>
-                        </div>)
-                    }
-                    else if (this.state.vehicleID === checkIn.vehicleID) {
-                        return (<div className="card" key={index} style={{ margin: "15px" }}>
-                            <div className="card-header">
-                                {checkIn.vehicleID}
-                            </div>
-                            <div className="card-body">
-                                {checkIn.trips.map((trip, ind) => {
-                                    return (<div key={ind}>
-                                        <div className="row">
-                                            <div className="col">
-                                                {trip.employeeID}
-                                            </div>
-                                            <div className="col">
-                                                {trip.date} : {trip.time}
-                                            </div>
-                                        </div>
-                                        <hr />
-                                    </div>)
-                                })}
-                            </div>
-                        </div>)
-                    } else return true
-                })}
+                {
+                    (this.state.date.getDay() === 4 && this.state.date.getMonth() === 10 && this.state.date.getFullYear() === 2021) && <div>
+                        {checkIns.map((checkIn, index) => {
+                            if (this.state.vehicleID === "ทั้งหมด") {
+                                return (<div className="card" key={index} style={{ margin: "15px" }}>
+                                    <div className="card-header">
+                                        {checkIn.vehicleID}
+                                    </div>
+                                    <div className="card-body">
+                                        {checkIn.trips.map((trip, ind) => {
+                                            return (<div key={ind}>
+                                                <div className="row">
+                                                    <div className="col">
+                                                        {trip.employeeID}
+                                                    </div>
+                                                    <div className="col">
+                                                        {trip.date} : {trip.time}
+                                                    </div>
+                                                </div>
+                                                <hr />
+                                            </div>)
+                                        })}
+                                    </div>
+                                </div>)
+                            }
+                            else if (this.state.vehicleID === checkIn.vehicleID) {
+                                return (<div className="card" key={index} style={{ margin: "15px" }}>
+                                    <div className="card-header">
+                                        {checkIn.vehicleID}
+                                    </div>
+                                    <div className="card-body">
+                                        {checkIn.trips.map((trip, ind) => {
+                                            return (<div key={ind}>
+                                                <div className="row">
+                                                    <div className="col">
+                                                        {trip.employeeID}
+                                                    </div>
+                                                    <div className="col">
+                                                        {trip.date} : {trip.time}
+                                                    </div>
+                                                </div>
+                                                <hr />
+                                            </div>)
+                                        })}
+                                    </div>
+                                </div>)
+                            } else return true
+                        })}
+                    </div>
+                }
+
             </div>
         );
     }

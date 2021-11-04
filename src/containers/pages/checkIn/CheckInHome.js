@@ -34,11 +34,14 @@ class CheckInHome extends Component {
                     localStorage.setItem('actk', res.data.data.accessToken)
                     this.props.history.push('/check-in/dashboard')
 
+                } else {
+                    alert("Username and Password is not match")
                 }
             }).catch((error) => {
                 console.log(error.response)
                 try {
-                    alert(`Error: ${error.response.data.msg}`)
+                    alert("Username and Password is not match")
+                    // alert(`Error: ${error.response.data.msg}`)
                 } catch (err) {
                     alert(err)
                 }

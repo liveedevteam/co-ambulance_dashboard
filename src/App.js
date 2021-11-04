@@ -53,9 +53,9 @@ class App extends Component {
               exact path='/'
               component={CheckInHome}
             />
-            <Route
-              exact path='/'
-              component={CheckInHome}
+            <CheckInPrivateRoute
+              exact path='/check-in/dashboard'
+              component={CheckInDashboard}
             />
           </Switch>
         </Suspense>}

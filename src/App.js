@@ -11,6 +11,9 @@ import './App.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
 import Loading from './containers/pages/Loading';
 import PrivateRoute from './components/PrivateRoute';
+import CheckInHome from './containers/pages/checkIn/CheckInHome';
+import CheckInPrivateRoute from './components/CheckInPrivateRoute';
+import CheckInDashboard from './containers/pages/checkIn/CheckInDashboard';
 
 const Home = React.lazy(() => import("./containers/pages/Home"))
 const Dashboard = React.lazy(() => import("./containers/pages/Dashboard"))
@@ -27,6 +30,42 @@ class App extends Component {
               component={Home}
             />
             <PrivateRoute
+              exact path='/dashboard'
+              component={Dashboard}
+            />
+            <Route
+              exact path='/susco/dashboard'
+              component={HomeDashboard}
+            />
+            <Route
+              exact path='/check-in/login'
+              component={CheckInHome}
+            />
+            <CheckInPrivateRoute
+              exact path='/check-in/dashboard'
+              component={CheckInDashboard}
+            />
+          </Switch>
+        </Suspense>}
+        {process.env.REACT_APP_ENV === 'sit' && <Suspense fallback={<Loading />}>
+          <Switch>
+            <Route
+              exact path='/'
+              component={CheckInHome}
+            />
+            <Route
+              exact path='/'
+              component={CheckInHome}
+            />
+          </Switch>
+        </Suspense>}
+        {process.env.REACT_APP_ENV === 'prod' && <Suspense fallback={<Loading />}>
+          <Switch>
+            <Route
+              exact path='/'
+              component={Home}
+            />
+            <Route
               exact path='/dashboard'
               component={Dashboard}
             />

@@ -52,7 +52,7 @@ class CheckInHome extends Component {
 
     componentDidMount = async () => {
         if (localStorage.getItem('actk')) {
-            this.props.history.push('/dashboard')
+            this.props.history.push('/check-in/dashboard')
         }
     }
 
